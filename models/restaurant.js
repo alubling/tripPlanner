@@ -17,7 +17,6 @@ Restaurant = mongoose.model('Restaurant', restaurantSchema);
 
 
 module.exports = {
-  Restaurant
-: Restaurant
+  Restaurant: Restaurant
 
 };
