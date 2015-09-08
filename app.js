@@ -3,31 +3,37 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var swig = require('swig');
-var sass = require('node-sass-middleware');
+// var sass = require('node-sass-middleware');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 
+// swig setup
+swig.setDefaults({cache: false});
 app.engine('html', swig.renderFile);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
+app.set('views', path.join(__dirname, 'views'));
+
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(
-  sass({
-    root: __dirname,
-    src: __dirname + '/assets', //where the sass files are
-    dest: __dirname + '/public', //where css should go
-    debug: true
-  })
-);
+// app.use(
+//   sass({
+//     root: __dirname,
+//     src: __dirname + '/assets', //where the sass files are
+//     dest: __dirname + '/public', //where css should go
+//     debug: true,
+//     prefix: '/stylesheets'
+//   })
+// );
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
 app.use('/', routes);
 app.use('/users', users);

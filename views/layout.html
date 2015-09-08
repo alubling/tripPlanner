@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Trip Planner{% endblock %}</title>
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/tripPlanner.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  </head>
+  <body>
+  	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-items">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+
+					<a class="navbar-brand" href="/"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>  Trip Planner</a>
+				</div>
+				<div id="nav-items" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/">Home</a></li>
+						<li><a href="/about">About</a></li>
+						<li><a href="/contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABcDdei3GEuvDnoTChFZUSbh1cva5duLU&sensor=true"></script>
+    <div class="jumbotron" id="map">
+
+    </div>
+		<div class="container content">
+		   {% block content %}{% endblock %}
+		</div>
+		<!-- <div id="footer" class="container text-muted">
+			WIKISTACK by FullstackAcademy
+		</div> -->
+		<script src="/bower_components/jquery/dist/jquery.js"></script>
+		<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+        function initialize_gmaps() {
+          // initialize new google maps LatLng object
+          var myLatlng = new google.maps.LatLng(40.705189,-74.009209);
+          // set the map options hash
+          var mapOptions = {
+              center: myLatlng,
+              zoom: 16,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          // get the maps div's HTML obj
+          var map_canvas_obj = document.getElementById("map");
+          // initialize a new Google Map with the options
+          var map = new google.maps.Map(map_canvas_obj, mapOptions);
+          // Add the marker to the map
+          var marker = new google.maps.Marker({
+              position: myLatlng,
+              title:"Hello World!"
+          });
+          // Add the marker to the map by calling setMap()
+          marker.setMap(map);
+        }
+
+        $(document).ready(function() {
+            initialize_gmaps();
+            $( "#draggable" ).draggable();
+        });
+    </script>
+  </body>
+</html>

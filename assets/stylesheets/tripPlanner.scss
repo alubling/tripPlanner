@@ -1,0 +1,39 @@
+body {
+  padding-left: 0;
+  padding-right: 0;
+}
+//
+// .navbar {
+//   background-color: red;
+// }
+
+#map {
+  box-sizing: border-box;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.btn-circle {
+  border-radius: 10px;
+}
+
+// .panel-default {
+//   width: 40%;
+// }
+
+#draggable {
+  width: auto;
+  height: auto;
+  padding: 0.5em;
+  position: absolute;
+  top: 100px;
+  right: 10px;
+  z-index: 99
+}
+
+// .navbar-inverse .navbar-nav &gt; li &gt; a, .navbar-inverse .navbar-brand {
+//     color: #676764;
+// }
