@@ -4,28 +4,26 @@
 
 {% block content %}
 
-<div class="panel panel-default ui-widget-content" id="draggable">
+<div class="panel panel-default" id="draggable">
 
-      <div class="panel-body" id="panel" style="background-color: white; opacity: 1.0">
+      <div class="panel-body">
         <div>
           <label for="Hotels" class="opaque">Hotels</label>
         </div>
         <div>
           <div class="col-lg-11">
-            <select class="form-control opaque" name="Hotels">
+            <select class="form-control background-white opaque" name="Hotels">
               {% for hotel in hotels %}
                 <option value="{{hotel.name}}">{{hotel.name}}</option>
               {% endfor %}
             </select>
           </div>
           <div class="col-lg-1">
-            <a href="#" class="anchor opaque">
+            <a href="#" class="opaque">
               <span class="glyphicon glyphicon-plus-sign"></span>
             </a>
           </div>
         </div>
-
-        <!-- <button class="btn-xs btn-circle btn-primary">+</button> -->
       </div>
 
       <div class="panel-body">
@@ -33,14 +31,14 @@
           <label for="Restaurants" class="opaque">Restaurants</label>
         </div>
         <div class="col-lg-11">
-          <select class="form-control opaque" name="Restaurants">
+          <select class="form-control background-white opaque" name="Restaurants">
             {% for restaurant in restaurants %}
-              <option value="{{restaurant.name}}">{{restaurant.name}}</option>
+              <option value="{{restaurant.name}}" class="opaque">{{restaurant.name}}</option>
             {% endfor %}
           </select>
         </div>
         <div class="col-lg-1">
-          <a href="#" class="anchor opaque">
+          <a href="#" class="opaque">
             <span class="glyphicon glyphicon-plus-sign"></span>
           </a>
         </div>
@@ -52,14 +50,14 @@
             <label for="Activities" class="opaque">Activities</label>
           </div>
           <div class="col-lg-11">
-            <select class="form-control opaque" name="Activities">
+            <select class="form-control background-white opaque" name="Activities">
               {% for activity in activities %}
                 <option value="{{activity.name}}">{{activity.name}}</option>
               {% endfor %}
             </select>
           </div>
           <div class="col-lg-1">
-            <a href="#" class="anchor opaque">
+            <a href="#" class="opaque">
               <span class="glyphicon glyphicon-plus-sign"></span>
             </a>
           </div>
@@ -71,21 +69,21 @@
   <div class="panel-heading">
     <h3 class="panel-title">
       <div class="btn-toolbar" role="toolbar" aria-label="...">
-        <div class="btn-group" role="group" aria-label="1">1</div>
-        <div class="btn-group" role="group" aria-label="2">2</div>
-        <div class="btn-group" role="group" aria-label="3">3</div>
+        <div class="btn-group opaque" role="group" aria-label="1">1</div>
+        <div class="btn-group opaque" role="group" aria-label="2">2</div>
+        <div class="btn-group opaque" role="group" aria-label="3">3</div>
       </div>
     </h3>
   </div>
-  <div class="panel-body" id="panel2">
+  <div class="panel-body">
     <div>
-      <label for="Hotels">Hotels</label>
+      <label for="Hotels" class="opaque">Hotels</label>
     </div>
     <div>
       <div class="col-lg-11">
         <select class="form-control" name="Hotels">
           {% for hotel in hotels %}
-            <option value="{{hotel.name}}">{{hotel.name}}</option>
+            <option value="{{hotel.name}}" class="background-white opaque">{{hotel.name}}</option>
           {% endfor %}
         </select>
       </div>
@@ -96,10 +94,6 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="test">
-  <h1 class="test">Hello World</h1>
 </div>
 
 

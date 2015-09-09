@@ -2,14 +2,11 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
-//
-// .navbar {
-//   background-color: red;
-// }
 
-.test {
-  color: red;
+.navbar {
+  background-color: #56564E;
 }
+
 
 #map {
   box-sizing: border-box;
@@ -28,13 +25,15 @@ body {
   top: 100px;
   right: 10px;
   z-index: 99;
-  // background-color: #969694;
-  zoom: 1;
-  filter: alpha(opacity=50);
-  opacity: 0.5;
+  // zoom: 1;
+  // filter: alpha(opacity=50);
+  // opacity: 0.5;
+  background-color: rgba(255, 255, 255, 0.5);
   .opaque {
-    background-color: white;
     opacity: 1;
+  }
+  .background-white {
+    background-color: #FFF;
   }
 }
 
@@ -47,22 +46,18 @@ body {
   top: 300px;
   left: 10px;
   z-index: 99;
-  // background-color: #969694;
-  zoom: 1;
-  filter: alpha(opacity=50);
-  opacity: 0.5;
+  background-color: rgba(255, 255, 255, 0.5);
+  .opaque {
+    opacity: 1;
+  }
+  .background-white {
+    background-color: #FFF;
+  }
+  // zoom: 1;
+  // filter: alpha(opacity=50);
+  // opacity: 0.5;
 }
 
-
-// .panel-body {
-//   zoom: 1;
-//   filter: alpha(opacity=50);
-//   opacity: 1;
-// }
-
-// .anchor {
-//   left-padding:
-// }
 
 // .navbar-inverse .navbar-nav &gt; li &gt; a, .navbar-inverse .navbar-brand {
 //     color: #676764;
