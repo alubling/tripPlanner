@@ -4,8 +4,8 @@
     <title>{% block title %}Trip Planner{% endblock %}</title>
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/style.css" rel="stylesheet">
-    <link href="/stylesheets/tripPlanner.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="/stylesheets/tripPlanner.css" rel="stylesheet">
   </head>
   <body>
   	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -68,6 +68,7 @@
         $(document).ready(function() {
             initialize_gmaps();
             $( "#draggable" ).draggable();
+            $( "#draggable2" ).draggable();
         });
     </script>
   </body>

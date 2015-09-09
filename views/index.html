@@ -5,51 +5,101 @@
 {% block content %}
 
 <div class="panel panel-default ui-widget-content" id="draggable">
-  <!-- <div class="panel-heading"></div> -->
-    <div class="panel-body">
-      <div>
-        <label for="Hotels">Hotels</label>
+
+      <div class="panel-body" id="panel" style="background-color: white; opacity: 1.0">
+        <div>
+          <label for="Hotels" class="opaque">Hotels</label>
+        </div>
+        <div>
+          <div class="col-lg-11">
+            <select class="form-control opaque" name="Hotels">
+              {% for hotel in hotels %}
+                <option value="{{hotel.name}}">{{hotel.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-lg-1">
+            <a href="#" class="anchor opaque">
+              <span class="glyphicon glyphicon-plus-sign"></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- <button class="btn-xs btn-circle btn-primary">+</button> -->
       </div>
-      <select class="" name="Hotels">
-        {% for hotel in hotels %}
-          <option value="{{hotel.name}}">{{hotel.name}}</option>
-        {% endfor %}
-      </select>
-      <button class="btn-xs btn-circle btn-primary">+</button>
-    </div>
-    <!-- <div class="panel-heading"></div> -->
+
       <div class="panel-body">
         <div>
-          <label for="Restaurants">Restaurants</label>
+          <label for="Restaurants" class="opaque">Restaurants</label>
         </div>
-        <select class="" name="Restaurants">
-          {% for restaurant in restaurants %}
-            <option value="{{restaurant.name}}">{{restaurant.name}}</option>
-          {% endfor %}
-        </select>
-        <button class="btn-xs btn-circle btn-primary">+</button>
-      </div>
-    <!-- <div class="panel-heading"></div> -->
-        <div class="panel-body">
-          <div>
-            <label for="Activities">Activities</label>
-          </div>
-          <select class="" name="Activities">
-            {% for activity in activities %}
-              <option value="{{activity.name}}">{{activity.name}}</option>
+        <div class="col-lg-11">
+          <select class="form-control opaque" name="Restaurants">
+            {% for restaurant in restaurants %}
+              <option value="{{restaurant.name}}">{{restaurant.name}}</option>
             {% endfor %}
           </select>
-          <button class="btn-xs btn-circle btn-primary">+</button>
+        </div>
+        <div class="col-lg-1">
+          <a href="#" class="anchor opaque">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+          </a>
+        </div>
+        <!-- <button class="btn-xs btn-circle btn-primary">+</button> -->
+      </div>
+
+        <div class="panel-body">
+          <div>
+            <label for="Activities" class="opaque">Activities</label>
+          </div>
+          <div class="col-lg-11">
+            <select class="form-control opaque" name="Activities">
+              {% for activity in activities %}
+                <option value="{{activity.name}}">{{activity.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-lg-1">
+            <a href="#" class="anchor opaque">
+              <span class="glyphicon glyphicon-plus-sign"></span>
+            </a>
+          </div>
+          <!-- <button class="btn-xs btn-circle btn-primary">+</button> -->
     </div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-default" id="draggable2">
   <div class="panel-heading">
-    <h3 class="panel-title">Panel title</h3>
+    <h3 class="panel-title">
+      <div class="btn-toolbar" role="toolbar" aria-label="...">
+        <div class="btn-group" role="group" aria-label="1">1</div>
+        <div class="btn-group" role="group" aria-label="2">2</div>
+        <div class="btn-group" role="group" aria-label="3">3</div>
+      </div>
+    </h3>
   </div>
-  <div class="panel-body">
-    Panel content
+  <div class="panel-body" id="panel2">
+    <div>
+      <label for="Hotels">Hotels</label>
+    </div>
+    <div>
+      <div class="col-lg-11">
+        <select class="form-control" name="Hotels">
+          {% for hotel in hotels %}
+            <option value="{{hotel.name}}">{{hotel.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-lg-1">
+        <a href="#" class="anchor">
+          <span class="glyphicon glyphicon-plus-sign"></span>
+        </a>
+      </div>
+    </div>
   </div>
+</div>
+
+<div class="test">
+  <h1 class="test">Hello World</h1>
 </div>
 
 
