@@ -14,12 +14,12 @@
           <div class="col-lg-11">
             <select class="form-control background-white opaque" name="Hotels">
               {% for hotel in hotels %}
-                <option value="{{hotel.name}}">{{hotel.name}}</option>
+                <option value="{{hotel.name}}" id="hotelSelection">{{hotel.name}}</option>
               {% endfor %}
             </select>
           </div>
           <div class="col-lg-1">
-            <a href="#" class="opaque">
+            <a href="#" class="opaque" id="target1">
               <span class="glyphicon glyphicon-plus-sign"></span>
             </a>
           </div>

@@ -69,6 +69,16 @@
             initialize_gmaps();
             $( "#draggable" ).draggable();
             $( "#draggable2" ).draggable();
+
+            var hotelSelection;
+            $("#target1").click(function(){
+                hotelSelection=$("#hotelSelection").val();
+                $.post("/",{hotelSelection: hotelSelection}, function(data){
+                  if(data==='done') {
+                    alert("login success");
+                  }
+                });
+            });
         });
     </script>
   </body>
