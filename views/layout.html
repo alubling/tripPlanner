@@ -72,7 +72,7 @@
 
             var hotelSelection;
             $("#target1").click(function(){
-                hotelSelection=$("#hotelSelection").val();
+                hotelSelection=$('select[name=Hotels]').val();
                 $.post("/",{hotelSelection: hotelSelection}, function(data){
                   if(data==='done') {
                     alert("login success");
