@@ -33,6 +33,12 @@ router.post('/', function(req, res, next) {
   var hotelSelection = req.body.hotelSelection;
   console.log(hotelSelection);
   hotelsSelected.push(hotelSelection);
+  // $.ajax({
+  //   url: "index.html",
+  //   context: document.body
+  // }).done(function() {
+  //   $(this)
+  // })
   res.send({hotelSelection: hotelSelection});
 })
 

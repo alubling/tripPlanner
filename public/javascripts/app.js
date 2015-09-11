@@ -28,6 +28,7 @@ $(document).ready(function() {
     var hotelSelection;
     $("#target1").click(function(){
         hotelSelection=$('select[name=Hotels]').val();
+        $('#hotelsList').html(hotelSelection);
         $.post("/",{hotelSelection: hotelSelection}, function(data){
           if(data==='done') {
             alert("login success");
