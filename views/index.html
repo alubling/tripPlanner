@@ -9,11 +9,11 @@
 
   <div class="panel panel-default" id="draggable">
 
-        {% include 'panels.html' with panelItems('Hotels', hotels) %}
+        <!-- {% include 'panels.html' with panelItems('Hotels', hotels) %}
         {% include 'panels.html' with panelItems('Restaurants', restaurants) %}
-        {% include 'panels.html' with panelItems('Activities', activities) %}
+        {% include 'panels.html' with panelItems('Activities', activities) %} -->
 
-        <!-- <div class="panel-body">
+        <div class="panel-body">
           <div>
             <label for="Hotels" class="opaque">Hotels</label>
           </div>
@@ -45,7 +45,7 @@
             </select>
           </div>
           <div class="col-lg-1">
-            <a href="#" class="opaque">
+            <a href="#" class="opaque" id="target2">
               <span class="glyphicon glyphicon-plus-sign"></span>
             </a>
           </div>
@@ -63,15 +63,16 @@
               </select>
             </div>
             <div class="col-lg-1">
-              <a href="#" class="opaque">
+              <a href="#" class="opaque" id="target3">
                 <span class="glyphicon glyphicon-plus-sign"></span>
               </a>
             </div>
-      </div> -->
+      </div>
 
   </div>
 
   <div class="panel panel-default" id="draggable2">
+
     <div class="panel-heading">
       <h3 class="panel-title">
         <div class="btn-toolbar" role="toolbar" aria-label="...">
@@ -81,18 +82,14 @@
         </div>
       </h3>
     </div>
+
     <div class="panel-body">
       <div>
         <label for="My Hotel" class="opaque">Hotels</label>
       </div>
       <div>
         <div class="col-lg-11" id="hotelsList">
-          <!-- <select class="form-control" name="Hotels">
-            {% for hotel in hotels %}
-              <option value="{{hotel.name}}" class="background-white opaque">{{hotel.name}}</option>
-            {% endfor %}
-          </select> -->
-          <p>{{hotelSelection}}</p>
+          <!-- <p>{{hotelSelection}}</p> -->
         </div>
         <div class="col-lg-1">
           <a href="#" class="anchor">
@@ -101,6 +98,37 @@
         </div>
       </div>
     </div>
+    <div class="panel-body">
+      <div>
+        <label for="My Restaurant" class="opaque">Restaurants</label>
+      </div>
+      <div>
+        <div class="col-lg-11" id="restaurantsList">
+
+        </div>
+        <div class="col-lg-1">
+          <a href="#" class="anchor">
+            <span class="glyphicon glyphicon-remove-circle"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div>
+        <label for="My Activity" class="opaque">Activities</label>
+      </div>
+      <div>
+        <div class="col-lg-11" id="activitiesList">
+
+        </div>
+        <div class="col-lg-1">
+          <a href="#" class="anchor">
+            <span class="glyphicon glyphicon-remove-circle"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 

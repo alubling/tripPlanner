@@ -27,12 +27,25 @@ $(document).ready(function() {
 
     var hotelSelection;
     $("#target1").click(function(){
+        // get the value of the selection
         hotelSelection=$('select[name=Hotels]').val();
+
+        // update the value of the selection
         $('#hotelsList').html(hotelSelection);
+
+        // not even sure why this post request is necessary, we've already updated the page with the value, its just not persistent
         $.post("/",{hotelSelection: hotelSelection}, function(data){
           if(data==='done') {
             alert("login success");
           }
         });
+    });
+    $("#target2").click(function(){
+        restaurantSelection=$('select[name=Restaurants]').val();
+        $('#restaurantsList').html(restaurantSelection);
+    });
+    $("#target3").click(function(){
+        activitySelection=$('select[name=Activities]').val();
+        $('#activitiesList').html(activitySelection);
     });
 });
