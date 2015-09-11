@@ -11,7 +11,18 @@ router.get('/', function(req, res, next) {
     models.Restaurant.find({}).exec(),
     models.Activity.find({}).exec()
   ]).then(function(values) {
-      res.render('index', { hotels: values[0], restaurants: values[1], activities: values[2] });
+      var data = {
+        hotels: values[0], restaurants: values[1], activities: values[2]
+      };
+      data.panelItems = function(label, items) {
+        return {
+          items: items,
+          label: label
+        }
+      }
+      return data;
+  }).then(function(data) {
+      res.render('index', data);
   }).catch(function(error) {
     if (error) throw Error(error.message);
     // next(error) -> Eric solution

@@ -2,12 +2,18 @@
 
   <div>Hello!</div>
 
+  <!-- {% include 'panel.html' with data.panelItems('Hotels', hotels) %} can make a function in the promise.all and separate out the html file to return generic code for each panel item -->
+
 {% block content %}
 
 
   <div class="panel panel-default" id="draggable">
 
-        <div class="panel-body">
+        {% include 'panels.html' with panelItems('Hotels', hotels) %}
+        {% include 'panels.html' with panelItems('Restaurants', restaurants) %}
+        {% include 'panels.html' with panelItems('Activities', activities) %}
+
+        <!-- <div class="panel-body">
           <div>
             <label for="Hotels" class="opaque">Hotels</label>
           </div>
@@ -43,7 +49,6 @@
               <span class="glyphicon glyphicon-plus-sign"></span>
             </a>
           </div>
-          <!-- <button class="btn-xs btn-circle btn-primary">+</button> -->
         </div>
 
           <div class="panel-body">
@@ -62,8 +67,8 @@
                 <span class="glyphicon glyphicon-plus-sign"></span>
               </a>
             </div>
-            <!-- <button class="btn-xs btn-circle btn-primary">+</button> -->
-      </div>
+      </div> -->
+
   </div>
 
   <div class="panel panel-default" id="draggable2">
@@ -98,28 +103,5 @@
     </div>
   </div>
 
-  <!-- <div>
-    <label for="Hotels">Hotels</label>
-    <select class="" name="Hotels">
-      {% for hotel in hotels %}
-        <option value="{{hotel.name}}">{{hotel.name}}</option>
-      {% endfor %}
-    </select>
-    <label for="Restaurants">Restaurants</label>
-    <select class="" name="Restaurants">
-      {% for restaurant in restaurants %}
-        <option value="{{restaurant.name}}">{{restaurant.name}}</option>
-      {% endfor %}
-    </select>
-    <label for="Activities">Activities</label>
-    <select class="" name="Activities">
-      {% for activity in activities %}
-        <option value="{{activity.name}}">{{activity.name}}</option>
-      {% endfor %}
-    </select>
-  </div> -->
 
 {% endblock %}
-
-      <!-- {% for hotel in hotels %}
-      {% endfor %} -->
