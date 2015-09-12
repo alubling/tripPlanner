@@ -1,3 +1,5 @@
+var markers = [];
+
 function initialize_gmaps() {
   // initialize new google maps LatLng object
   var myLatlng = new google.maps.LatLng(40.705189,-74.009209);
@@ -11,17 +13,56 @@ function initialize_gmaps() {
   var map_canvas_obj = document.getElementById("map");
   // initialize a new Google Map with the options
   var map = new google.maps.Map(map_canvas_obj, mapOptions);
-  // Add the marker to the map
-  var marker = new google.maps.Marker({
-      position: myLatlng,
-      title:"Hello World!"
-  });
-  // Add the marker to the map by calling setMap()
-  marker.setMap(map);
+
+  // // Add the marker to the map
+  // var marker = new google.maps.Marker({
+  //     position: myLatlng,
+  //     title:"Hello World!"
+  // });
+  // // Add the marker to the map by calling setMap()
+  // marker.setMap(map);
+
+  return map;
 }
 
+
+
+   function setMarkers(map, locations) {
+
+     if (!locations) {
+       var myLatlng = [40.705189,-74.009209];
+       locations.push(myLatlng);
+     }
+
+       var _bounds = new google.maps.LatLngBounds();
+
+       var shape = {
+           coords: [1, 1, 1, 20, 18, 20, 18, 1],
+           type: 'poly'
+       };
+
+       for (var i = 0; i < locations.length; i++) {
+           var loc = locations[i];
+
+           var marker = new google.maps.Marker({
+               position: {lat: loc[0], lng: loc[1]},
+               map: map,
+              //  icon: image[loc[0]],
+              //  shape: shape,
+               title: loc[2],
+               zIndex: 3
+           });
+
+           markers.push(marker);
+
+           _bounds.extend(marker.getPosition());
+       }
+       map.fitBounds(_bounds);
+
+   }
+
 $(document).ready(function() {
-    initialize_gmaps();
+    var map = initialize_gmaps();
     $( "#draggable" ).draggable();
     $( "#draggable2" ).draggable();
 
@@ -42,7 +83,8 @@ $(document).ready(function() {
 
     var hotelSelection, restaurantSelection, activitySelection;
     var hotelLocation = [], restaurantLocation = [], activityLocation = [];
-    var hotelArray = [], restaurantArray = [], activityArray = [];
+    var locations = [];
+    // var hotelArray = [], restaurantArray = [], activityArray = [];
     $("#target1").click(function(){
         // get the value of the selection
         hotelSelection=$('select[name=Hotels]').val();
@@ -52,7 +94,10 @@ $(document).ready(function() {
         hotelLocation = JSON.parse($('#Hotels option:selected').attr('place'))[0]["location"];
         hotelLocation.push(hotelSelection);
         hotelLocation.push("hotel");
-        hotelArray.push(hotelLocation);
+        locations.push(hotelLocation);
+
+        // set the marker for the hotel
+        setMarkers(map, locations);
 
         // not even sure why this ajax post request is necessary, we've already updated the page with the value, its just not persistent
         // $.post("/",{hotelSelection: hotelSelection}, function(data){
@@ -66,15 +111,59 @@ $(document).ready(function() {
         restaurantLocation = JSON.parse($('#Restaurants option:selected').attr('place'))[0]["location"];
         restaurantLocation.push(restaurantSelection);
         restaurantLocation.push("restaurant");
-        restaurantArray.push(restaurantLocation);
-        $('#restaurantsList').html(restaurantSelection);
+        locations.push(restaurantLocation);
+
+        var listItem = $("<li />");
+        listItem.html(restaurantSelection);
+        $('#restaurantsList').append(listItem);
+        // $('#restaurantsList').html(restaurantSelection);
+
+        setMarkers(map, locations);
+
     });
     $("#target3").click(function(){
         activitySelection=$('select[name=Activities]').val();
         activityLocation = JSON.parse($('#Activities option:selected').attr('place'))[0]["location"];
         activityLocation.push(activitySelection);
         activityLocation.push("activity");
-        activityArray.push(activityLocation);
-        $('#activitiesList').html(activitySelection);
+        locations.push(activityLocation);
+
+        var listItem2 = $("<li />");
+        listItem2.addClass("row");
+        var deleteButton = '<div class="col-lg-1">'+
+            '<a href="#" class="anchor" name="removeItem">'+
+              '<span name="removeItem" class="glyphicon glyphicon-remove-circle"></span>'+
+            '</a>'+
+          '</div>';
+        activitySelection = '<div class="col-lg-11">'+ activitySelection+'</div>'
+        listItem2.html(activitySelection + deleteButton);
+        $('#activitiesList').append(listItem2);
+        // $('#activitiesList').html(activitySelection);
+        setMarkers(map, locations);
     });
+
+    $("body").on('click', 'a.anchor', function(event) {
+      var name = $(event.target).parent().parent().siblings().html();
+      var itemToRemove = $(event.target).parent().parent().parent().remove();
+      // console.log(JSON.stringify(locations));
+      for(var i=0; i< locations.length; i++){
+        if(locations[i][2] === name){
+          locations.splice(i,1);
+          //console.log(markers);
+          //markers[i].setMap(null);
+        }
+      }
+      console.log(markers);
+      for(var i=0; i<markers.length; i++){
+        if(markers[i].title === name){
+          markers[i].setMap(null);
+          markers.splice(i,1);
+        }
+      }
+      console.log(markers);
+      // console.log(locations);
+      setMarkers(map, locations);
+    });
+
+
 });
