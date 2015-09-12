@@ -1,4 +1,6 @@
 var markers = [];
+var _bounds = new google.maps.LatLngBounds();
+
 
 function initialize_gmaps() {
   // initialize new google maps LatLng object
@@ -25,14 +27,12 @@ function initialize_gmaps() {
   return map;
 }
 
-
-
    function setMarkers(map, locations) {
 
-     if (!locations) {
-       var myLatlng = [40.705189,-74.009209];
-       locations.push(myLatlng);
-     }
+    //  if (!locations) {
+    //    var myLatlng = [40.705189,-74.009209];
+    //    locations.push(myLatlng);
+    //  }
 
        var _bounds = new google.maps.LatLngBounds();
 
@@ -44,20 +44,46 @@ function initialize_gmaps() {
        for (var i = 0; i < locations.length; i++) {
            var loc = locations[i];
 
+             var marker = new google.maps.Marker({
+                 position: {lat: loc[0], lng: loc[1]},
+                 map: map,
+                //  icon: image[loc[0]],
+                //  shape: shape,
+                 title: loc[2],
+                 zIndex: 3
+             });
+
+             markers.push(marker);
+
+
+
+           _bounds.extend(marker.getPosition());
+       }
+       map.fitBounds(_bounds);
+
+   }
+
+   function updateMarkers(map, location) {
+
+     var shape = {
+         coords: [1, 1, 1, 20, 18, 20, 18, 1],
+         type: 'poly'
+     };
+
            var marker = new google.maps.Marker({
-               position: {lat: loc[0], lng: loc[1]},
+               position: {lat: location[0], lng: location[1]},
                map: map,
-              //  icon: image[loc[0]],
+              //  icon: image[location[0]],
               //  shape: shape,
-               title: loc[2],
+               title: location[2],
                zIndex: 3
            });
 
            markers.push(marker);
 
-           _bounds.extend(marker.getPosition());
-       }
-       map.fitBounds(_bounds);
+     _bounds.extend(marker.getPosition());
+
+     map.fitBounds(_bounds);
 
    }
 
@@ -130,27 +156,30 @@ $(document).ready(function() {
 
         var listItem2 = $("<li />");
         listItem2.addClass("row");
-        var deleteButton = '<div class="col-lg-1">'+
+        var genericDeleteButton = '<div class="col-lg-1">'+
             '<a href="#" class="anchor" name="removeItem">'+
               '<span name="removeItem" class="glyphicon glyphicon-remove-circle"></span>'+
             '</a>'+
           '</div>';
+        var deleteButton = $(genericDeleteButton);
+        deleteButton.attr('data-name', activitySelection);
         activitySelection = '<div class="col-lg-11">'+ activitySelection+'</div>'
-        listItem2.html(activitySelection + deleteButton);
+        listItem2.append($(activitySelection));
+        listItem2.append(deleteButton);
+        // listItem2.html(activitySelection + deleteButton);
         $('#activitiesList').append(listItem2);
         // $('#activitiesList').html(activitySelection);
-        setMarkers(map, locations);
+        updateMarkers(map, activityLocation);
     });
 
-    $("body").on('click', 'a.anchor', function(event) {
-      var name = $(event.target).parent().parent().siblings().html();
-      var itemToRemove = $(event.target).parent().parent().parent().remove();
-      // console.log(JSON.stringify(locations));
+    $("body").on('click', 'span[name="removeItem"]', function(event) {
+      // var name = $(event.target).parent().parent().siblings().html();
+      var name = $(event.target).parent().parent().attr('data-name');
+      console.log(name);
+      $(event.target).parent().parent().parent().remove();
       for(var i=0; i< locations.length; i++){
         if(locations[i][2] === name){
           locations.splice(i,1);
-          //console.log(markers);
-          //markers[i].setMap(null);
         }
       }
       console.log(markers);
@@ -161,8 +190,7 @@ $(document).ready(function() {
         }
       }
       console.log(markers);
-      // console.log(locations);
-      setMarkers(map, locations);
+      // setMarkers(map, locations);
     });
 
 
