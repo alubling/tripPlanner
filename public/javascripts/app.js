@@ -27,65 +27,65 @@ function initialize_gmaps() {
   return map;
 }
 
-   function setMarkers(map, locations) {
+function setMarkers(map, locations) {
 
-    //  if (!locations) {
-    //    var myLatlng = [40.705189,-74.009209];
-    //    locations.push(myLatlng);
-    //  }
+//  if (!locations) {
+//    var myLatlng = [40.705189,-74.009209];
+//    locations.push(myLatlng);
+//  }
 
-       var _bounds = new google.maps.LatLngBounds();
+   var _bounds = new google.maps.LatLngBounds();
 
-       var shape = {
-           coords: [1, 1, 1, 20, 18, 20, 18, 1],
-           type: 'poly'
-       };
+   var shape = {
+       coords: [1, 1, 1, 20, 18, 20, 18, 1],
+       type: 'poly'
+   };
 
-       for (var i = 0; i < locations.length; i++) {
-           var loc = locations[i];
+   for (var i = 0; i < locations.length; i++) {
+       var loc = locations[i];
 
-             var marker = new google.maps.Marker({
-                 position: {lat: loc[0], lng: loc[1]},
-                 map: map,
-                //  icon: image[loc[0]],
-                //  shape: shape,
-                 title: loc[2],
-                 zIndex: 3
-             });
+         var marker = new google.maps.Marker({
+             position: {lat: loc[0], lng: loc[1]},
+             map: map,
+            //  icon: image[loc[0]],
+            //  shape: shape,
+             title: loc[2],
+             zIndex: 3
+         });
 
-             markers.push(marker);
+         markers.push(marker);
 
 
 
-           _bounds.extend(marker.getPosition());
-       }
-       map.fitBounds(_bounds);
-
+       _bounds.extend(marker.getPosition());
    }
+   map.fitBounds(_bounds);
 
-   function updateMarkers(map, location) {
+}
 
-     var shape = {
-         coords: [1, 1, 1, 20, 18, 20, 18, 1],
-         type: 'poly'
-     };
+function updateMarkers(map, location) {
 
-           var marker = new google.maps.Marker({
-               position: {lat: location[0], lng: location[1]},
-               map: map,
-              //  icon: image[location[0]],
-              //  shape: shape,
-               title: location[2],
-               zIndex: 3
-           });
+ var shape = {
+     coords: [1, 1, 1, 20, 18, 20, 18, 1],
+     type: 'poly'
+ };
 
-           markers.push(marker);
+       var marker = new google.maps.Marker({
+           position: {lat: location[0], lng: location[1]},
+           map: map,
+          //  icon: image[location[0]],
+          //  shape: shape,
+           title: location[2],
+           zIndex: 3
+       });
 
-     _bounds.extend(marker.getPosition());
+       markers.push(marker);
 
-     map.fitBounds(_bounds);
+ _bounds.extend(marker.getPosition());
 
-   }
+ map.fitBounds(_bounds);
+
+}
 
 $(document).ready(function() {
     var map = initialize_gmaps();
@@ -110,7 +110,7 @@ $(document).ready(function() {
     var hotelSelection, restaurantSelection, activitySelection;
     var hotelLocation = [], restaurantLocation = [], activityLocation = [];
     var locations = [];
-    // var hotelArray = [], restaurantArray = [], activityArray = [];
+
     $("#target1").click(function(){
         // get the value of the selection
         hotelSelection=$('select[name=Hotels]').val();
@@ -166,12 +166,11 @@ $(document).ready(function() {
         activitySelection = '<div class="col-lg-11">'+ activitySelection+'</div>'
         listItem2.append($(activitySelection));
         listItem2.append(deleteButton);
-        // listItem2.html(activitySelection + deleteButton);
         $('#activitiesList').append(listItem2);
-        // $('#activitiesList').html(activitySelection);
         updateMarkers(map, activityLocation);
     });
 
+    // removing items from the itinerary
     $("body").on('click', 'span[name="removeItem"]', function(event) {
       // var name = $(event.target).parent().parent().siblings().html();
       var name = $(event.target).parent().parent().attr('data-name');
