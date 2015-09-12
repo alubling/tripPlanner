@@ -7,6 +7,7 @@ var swig = require('swig');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var apis = require('./routes/api');
 
 var app = express();
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
 app.use('/', routes);
+app.use('/api', apis);
 app.use('/users', users);
 
 

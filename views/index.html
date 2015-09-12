@@ -6,8 +6,9 @@
 
 {% block content %}
 
+<div id="myTabs">
 
-  <div class="panel panel-default" id="draggable">
+  <div class="panel panel-default" id="draggable" data-toggle="tab">
 
         <!-- {% include 'panels.html' with panelItems('Hotels', hotels) %}
         {% include 'panels.html' with panelItems('Restaurants', restaurants) %}
@@ -19,9 +20,9 @@
           </div>
           <div>
             <div class="col-lg-11">
-              <select class="form-control background-white opaque" name="Hotels">
+              <select class="form-control background-white opaque" name="Hotels" id="Hotels">
                 {% for hotel in hotels %}
-                  <option value="{{hotel.name}}" id="hotelSelection">{{hotel.name}}</option>
+                  <option value="{{hotel.name}}" place="{{hotel.place | json}}" id="hotelSelection">{{hotel.name}}</option>
                 {% endfor %}
               </select>
             </div>
@@ -38,9 +39,9 @@
             <label for="Restaurants" class="opaque">Restaurants</label>
           </div>
           <div class="col-lg-11">
-            <select class="form-control background-white opaque" name="Restaurants">
+            <select class="form-control background-white opaque" name="Restaurants" id="Restaurants">
               {% for restaurant in restaurants %}
-                <option value="{{restaurant.name}}" class="opaque">{{restaurant.name}}</option>
+                <option value="{{restaurant.name}}" place="{{restaurant.place | json}}" class="opaque">{{restaurant.name}}</option>
               {% endfor %}
             </select>
           </div>
@@ -56,9 +57,9 @@
               <label for="Activities" class="opaque">Activities</label>
             </div>
             <div class="col-lg-11">
-              <select class="form-control background-white opaque" name="Activities">
+              <select class="form-control background-white opaque" name="Activities" id="Activities">
                 {% for activity in activities %}
-                  <option value="{{activity.name}}">{{activity.name}}</option>
+                  <option value="{{activity.name}}" place="{{activity.place | json}}">{{activity.name}}</option>
                 {% endfor %}
               </select>
             </div>
@@ -71,7 +72,7 @@
 
   </div>
 
-  <div class="panel panel-default" id="draggable2">
+  <div class="panel panel-default" id="draggable2" data-toggle="tab">
 
     <div class="panel-heading">
       <h3 class="panel-title">
@@ -103,9 +104,9 @@
         <label for="My Restaurant" class="opaque">Restaurants</label>
       </div>
       <div>
-        <div class="col-lg-11" id="restaurantsList">
+        <ul class="col-lg-11" id="restaurantsList">
 
-        </div>
+        </ul>
         <div class="col-lg-1">
           <a href="#" class="anchor">
             <span class="glyphicon glyphicon-remove-circle"></span>
@@ -130,6 +131,8 @@
     </div>
 
   </div>
+
+</div>
 
 
 {% endblock %}

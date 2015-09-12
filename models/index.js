@@ -30,20 +30,20 @@ var placeSchema = new Schema ({
 
 var hotelSchema = new Schema ({
   name: String,
-  place: String, // [placeSchema]
+  place: [placeSchema], // [placeSchema]
   num_stars: {type: Number, min: 1, max: 5},
   amenities: [String] // is this a comma delimited list?
 });
 
 var activitySchema = new Schema ({
   name: String,
-  place: String, //[placeSchema]
+  place: [placeSchema], //[placeSchema]
   age_range: String
 });
 
 var restaurantSchema = new Schema ({
   name: String,
-  place: String, // [placeSchema]
+  place: [placeSchema], // [placeSchema]
   cuisines: [String],
   price: {type: Number, min: 1, max: 5}
 });
