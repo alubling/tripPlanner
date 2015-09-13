@@ -110,6 +110,11 @@ $(document).ready(function() {
     var hotelSelection, restaurantSelection, activitySelection;
     var hotelLocation = [], restaurantLocation = [], activityLocation = [];
     var locations = [];
+    var genericDeleteButton = '<div class="col-lg-1">'+
+        '<a href="#" class="anchor" name="removeItem">'+
+          '<span name="removeItem" class="glyphicon glyphicon-remove-circle"></span>'+
+        '</a>'+
+      '</div>';
 
     $("#target1").click(function(){
         // get the value of the selection
@@ -149,25 +154,39 @@ $(document).ready(function() {
     });
     $("#target3").click(function(){
         activitySelection=$('select[name=Activities]').val();
-        activityLocation = JSON.parse($('#Activities option:selected').attr('place'))[0]["location"];
-        activityLocation.push(activitySelection);
-        activityLocation.push("activity");
-        locations.push(activityLocation);
 
-        var listItem2 = $("<li />");
-        listItem2.addClass("row");
-        var genericDeleteButton = '<div class="col-lg-1">'+
-            '<a href="#" class="anchor" name="removeItem">'+
-              '<span name="removeItem" class="glyphicon glyphicon-remove-circle"></span>'+
-            '</a>'+
-          '</div>';
-        var deleteButton = $(genericDeleteButton);
-        deleteButton.attr('data-name', activitySelection);
-        activitySelection = '<div class="col-lg-11">'+ activitySelection+'</div>'
-        listItem2.append($(activitySelection));
-        listItem2.append(deleteButton);
-        $('#activitiesList').append(listItem2);
-        updateMarkers(map, activityLocation);
+        // this is for map operations, NOT Days
+        activityId = JSON.parse($('#Activities option:selected').attr('data-id'));
+
+        console.log(currentDay);
+        // ajax call for the specific activity
+        $.ajax({
+          method: "GET",
+          url: "http://localhost:3000/api/activity/" + activityId
+        }).done(function(data) {
+          console.log(data);
+          // update the day with the activity
+          currentDay.activities.push(data);
+          // for the map to work
+          activityLocation = data.place[0].location;
+          console.log(activityLocation);
+          activityLocation.push(data.name);
+          activityLocation.push("activity");
+          locations.push(activityLocation);
+          // add the activity to the itinerary UI
+          var listItem2 = $("<li />");
+          listItem2.addClass("row");
+          var deleteButton = $(genericDeleteButton);
+          deleteButton.attr('data-name', activitySelection);
+          activitySelection = '<div class="col-lg-11">'+ activitySelection+'</div>'
+          listItem2.append($(activitySelection));
+          listItem2.append(deleteButton);
+          $('#activitiesList').append(listItem2);
+          // update the map with that activity
+          updateMarkers(map, activityLocation);
+        });
+
+
     });
 
     // removing items from the itinerary

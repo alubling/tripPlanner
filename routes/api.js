@@ -14,5 +14,16 @@ router.get('/all', function(req, res){
 
 });
 
+router.get('/activity/:id', function(req, res){
+
+  var _id = req.params.id;
+  models.Activity.findOne({_id: _id}).then(function(data) {
+    res.json(data);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+
+});
 
 module.exports = router;

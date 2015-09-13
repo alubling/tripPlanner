@@ -59,7 +59,7 @@
             <div class="col-lg-11">
               <select class="form-control background-white opaque" name="Activities" id="Activities">
                 {% for activity in activities %}
-                  <option value="{{activity.name}}" place="{{activity.place | json}}">{{activity.name}}</option>
+                  <option value="{{activity.name}}" data-id="{{activity._id | json}}">{{activity.name}}</option>
                 {% endfor %}
               </select>
             </div>
