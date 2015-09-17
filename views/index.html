@@ -20,14 +20,14 @@
           </div>
           <div>
             <div class="col-lg-11">
-              <select class="form-control background-white opaque" name="Hotels" id="Hotels">
+              <select class="form-control background-white opaque" id="HotelSelection">
                 {% for hotel in hotels %}
-                  <option value="{{hotel.name}}" place="{{hotel.place | json}}" id="hotelSelection">{{hotel.name}}</option>
+                  <option value="{{hotel._id|json}}">{{hotel.name}}</option>
                 {% endfor %}
               </select>
             </div>
             <div class="col-lg-1">
-              <a href="#" class="opaque" id="target1">
+              <a href="#" class="opaque" id="addHotelBtn">
                 <span class="glyphicon glyphicon-plus-sign"></span>
               </a>
             </div>
@@ -39,14 +39,14 @@
             <label for="Restaurants" class="opaque">Restaurants</label>
           </div>
           <div class="col-lg-11">
-            <select class="form-control background-white opaque" name="Restaurants" id="Restaurants">
+            <select class="form-control background-white opaque" id="RestaurantSelection">
               {% for restaurant in restaurants %}
-                <option value="{{restaurant.name}}" place="{{restaurant.place | json}}" class="opaque">{{restaurant.name}}</option>
+                <option value="{{restaurant._id|json}}" class="opaque">{{restaurant.name}}</option>
               {% endfor %}
             </select>
           </div>
           <div class="col-lg-1">
-            <a href="#" class="opaque" id="target2">
+            <a href="#" class="opaque" id="addRestaurantBtn">
               <span class="glyphicon glyphicon-plus-sign"></span>
             </a>
           </div>
@@ -57,14 +57,14 @@
               <label for="Activities" class="opaque">Activities</label>
             </div>
             <div class="col-lg-11">
-              <select class="form-control background-white opaque" name="Activities" id="Activities">
+              <select class="form-control background-white opaque" id="ActivitySelection">
                 {% for activity in activities %}
-                  <option value="{{activity.name}}" data-id="{{activity._id | json}}">{{activity.name}}</option>
+                  <option value="{{activity._id|json}}">{{activity.name}}</option>
                 {% endfor %}
               </select>
             </div>
             <div class="col-lg-1">
-              <a href="#" class="opaque" id="target3">
+              <a href="#" class="opaque" id="addActivityBtn">
                 <span class="glyphicon glyphicon-plus-sign"></span>
               </a>
             </div>
@@ -76,56 +76,24 @@
 
     <div class="panel-heading">
       <h3 class="panel-title">
-        <ul class="pagination" id="days">
-          <li onclick="addDay()"><a href="">+</a></li>
+        <ul class="pagination" id="day-picker">
+          <li id="addDayBtn"><a href="javascript:void(0)">+</a></li>
+          <li id="removeDayBtn"><a href="javascript:void(0)">-</a></li>
         </ul>
       </h3>
     </div>
 
     <div class="panel-body">
-      <div>
         <label for="My Hotel" class="opaque">Hotels</label>
-      </div>
-      <div>
-        <div class="col-lg-11" id="hotelsList">
-          <!-- <p>{{hotelSelection}}</p> -->
-        </div>
-        <!-- <div class="col-lg-1">
-          <a href="#" class="anchor">
-            <span class="glyphicon glyphicon-remove-circle"></span>
-          </a>
-        </div> -->
-      </div>
+        <ul id="HotelList"></ul>
     </div>
     <div class="panel-body">
-      <div>
         <label for="My Restaurant" class="opaque">Restaurants</label>
-      </div>
-      <div>
-        <ul class="col-lg-11" id="restaurantsList">
-
-        </ul>
-        <!-- <div class="col-lg-1">
-          <a href="#" class="anchor">
-            <span class="glyphicon glyphicon-remove-circle"></span>
-          </a>
-        </div> -->
-      </div>
+        <ul  id="RestaurantList"></ul>
     </div>
     <div class="panel-body">
-      <div>
         <label for="My Activity" class="opaque">Activities</label>
-      </div>
-      <div>
-        <ul id="activitiesList" style="list-style-type: none">
-
-        </ul>
-        <!-- <div class="col-lg-1">
-          <a href="#" class="anchor">
-            <span class="glyphicon glyphicon-remove-circle"></span>
-          </a>
-        </div> -->
-      </div>
+        <ul  id="ActivityList"></ul>
     </div>
 
   </div>

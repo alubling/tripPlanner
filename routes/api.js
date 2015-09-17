@@ -14,6 +14,32 @@ router.get('/all', function(req, res){
 
 });
 
+router.get('/hotel/:id', function(req, res){
+
+  var _id = req.params.id;
+  models.Hotel.findOne({_id: _id}).then(function(data) {
+        res.json(data);
+  })
+  .catch(function(err) {
+          console.log(err);
+          res.status(500);
+  });
+
+});
+
+router.get('/restaurant/:id', function(req, res){
+
+  var _id = req.params.id;
+  models.Restaurant.findOne({_id: _id}).then(function(data) {
+    res.json(data);
+  })
+  .catch(function(err) {
+    console.log(err);
+          res.status(500);
+  });
+
+});
+
 router.get('/activity/:id', function(req, res){
 
   var _id = req.params.id;
@@ -22,6 +48,7 @@ router.get('/activity/:id', function(req, res){
   })
   .catch(function(err) {
     console.log(err);
+          res.status(500);
   });
 
 });
