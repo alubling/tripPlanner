@@ -16,20 +16,29 @@ Trip.prototype = {
         ['Hotel', 'Restaurant', 'Activity'].forEach(function(label){
             $('#add'+label+'Btn').on('click',function(){
                 var id = JSON.parse($('#'+label+'Selection').val());
-                that.currentDay.addItemByLabelAndId(label, id).done(function(item){
-                    //////////////////Here needs code to validate////////////////////
-                    /////////////////prevent from duplicate adding///////////////////
-                    var marker = new google.maps.Marker({
-                        position: {lat: item.place[0].location[0], lng: item.place[0].location[1]},
-                        title:item.name
-                    });
-                    marker.setMap(that.map);
-                    that.markers[item._id] = marker;
-                    that.currentDay[label].push(item);
-                    that.showInPanel();
-                    that.zoomMap();
+                if(label === 'Hotel' && that.currentDay[label].length != 0){
+                    alert('You already have added one hotel for the day!');
+                }
+                else if (label === 'Restaurant' && that.currentDay[label].length === 3){
+                    alert('You have reached the maximum restaurants for the day!');
+                }
+                else if(that.hasDuplication(label, id)){
+                    alert("You have already added this "+label);
+                }
+                else {
+                    that.currentDay.addItemByLabelAndId(label, id).done(function (item) {
+                        var marker = new google.maps.Marker({
+                            position: {lat: item.place[0].location[0], lng: item.place[0].location[1]},
+                            title: item.name
+                        });
+                        marker.setMap(that.map);
+                        that.markers[item._id] = marker;
+                        that.currentDay[label].push(item);
+                        that.showInPanel();
+                        that.zoomMap();
 
-                });
+                    });
+                }
             });
         }, this);
 
@@ -39,6 +48,15 @@ Trip.prototype = {
         $("#day-picker").on('click', '#removeDayBtn', function(){
             that.removeDay();
         });
+    },
+    hasDuplication: function(label, id){
+        var res = this.currentDay[label].filter(function(item){
+            return item._id = id;
+        });
+        if(res.length > 0){
+            return true;
+        }
+        return false;
     },
     zoomMap: function(){
         var _bounds = new google.maps.LatLngBounds();
