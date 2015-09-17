@@ -19,10 +19,15 @@ Trip.prototype = {
                 that.currentDay.addItemByLabelAndId(label, id).done(function(item){
                     //////////////////Here needs code to validate////////////////////
                     /////////////////prevent from duplicate adding///////////////////
-
+                    var marker = new google.maps.Marker({
+                        position: {lat: item.place[0].location[0], lng: item.place[0].location[1]},
+                        title:item.name
+                    });
+                    marker.setMap(that.map);
+                    that.markers[item._id] = marker;
                     that.currentDay[label].push(item);
                     that.showInPanel();
-
+                    that.zoomMap();
 
                 });
             });
@@ -34,6 +39,44 @@ Trip.prototype = {
         $("#day-picker").on('click', '#removeDayBtn', function(){
             that.removeDay();
         });
+    },
+    zoomMap: function(){
+        var _bounds = new google.maps.LatLngBounds();
+        if($.isEmptyObject(this.markers)){
+            this.initMap();
+        }
+        else {
+            for(var key in this.markers){
+                _bounds.extend(this.markers[key].position);
+            }
+            this.map.fitBounds(_bounds);
+        }
+
+    },
+    clearMarkers: function(){
+        for(var key in this.markers){
+            this.markers[key].setMap(null);
+        }
+        this.markers = {};
+    },
+    switchMarkers: function(){
+        this.clearMarkers();
+        this.createMarkers();
+        this.zoomMap();
+
+    },
+    createMarkers: function(){
+        var that = this;
+        ['Hotel','Restaurant', 'Activity'].forEach(function(label){
+            this.currentDay[label].forEach(function(item){
+                var marker = new google.maps.Marker({
+                    position: {lat: item.place[0].location[0], lng: item.place[0].location[1]},
+                    title:item.name
+                });
+                marker.setMap(that.map);
+                that.markers[item._id] = marker;
+            });
+        }, this);
     },
     initMap : function(){
         this.map = new google.maps.Map(document.getElementById("map"), {
@@ -54,9 +97,9 @@ Trip.prototype = {
     renderDay: function(dayIndex){
         this.currentDay = this.days[dayIndex-1];
         this.currentIndex = dayIndex;
+        this.switchMarkers();
         this.showDayPicker();
         this.showInPanel();
-        console.log(this.currentDay, this.currentIndex);
     },
     showInPanel: function(){
         var that = this;
@@ -73,8 +116,11 @@ Trip.prototype = {
                 $delBtn = $('<i class="fa fa-times-circle pull-right"></i>');
                 $delBtn.click(function(){
                     that.currentDay.removeItemByLabelAndId(label, item._id);
-                    console.log(that.currentDay);
+                    var marker = that.markers[item._id];
+                    delete that.markers[item._id];
+                    marker.setMap(null);
                     that.showInPanel();
+                    that.zoomMap();
                 })
                 $item.append($delBtn);
                 $container.append($item);
